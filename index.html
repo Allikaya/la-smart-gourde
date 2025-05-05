@@ -47,7 +47,6 @@
     <p>Boostez votre énergie et votre concentration où que vous soyez</p>
     <button class="button">Commander maintenant</button>
   </header>
-
   <nav>
     <div class="country-select">
       <label>Pays de livraison:
@@ -59,7 +58,6 @@
       </label>
     </div>
   </nav>
-
   <section class="container">
     <div class="product-gallery swiper">
       <div class="swiper-wrapper">
@@ -69,11 +67,9 @@
       </div>
       <div class="swiper-pagination"></div>
     </div>
-
     <div class="fullscreen-modal" id="fullscreenModal" onclick="closeFullscreen()">
       <img id="fullscreenImage" src="" alt="Vue agrandie">
     </div>
-
     <h2>Fonctionnalités principales</h2>
     <ul>
       <li>Alerte hydratation intelligente</li>
@@ -82,7 +78,6 @@
       <li>Application mobile connectée</li>
       <li>Isothermie optimisée</li>
     </ul>
-
     <h2>Fiche technique</h2>
     <ul>
       <li>Taille : 25 cm</li>
@@ -137,12 +132,6 @@
       <div class="swiper-pagination"></div>
     </div>
 
-    <h2>Vidéo démonstration</h2>
-    <video controls width="100%">
-      <source src="demo-gourde.mp4" type="video/mp4">
-      <p>Votre navigateur ne supporte pas la vidéo.</p>
-    </video>
-
     <h2>FAQ</h2>
     <div class="dropdown faq">
       <span>Voir les questions fréquentes</span>
@@ -192,7 +181,6 @@
       pagination: { el: '.swiper-pagination', clickable: true },
       autoplay: { delay: 5000 },
     });
-
     function updateDeliveryOptions() {
       const country = document.getElementById("country-select").value;
       const delivery = document.getElementById("delivery-options");
@@ -208,14 +196,12 @@
         delivery.innerHTML += '<option>Express - 3 jours - 25€</option>';
       }
     }
-
     function openFullscreen(src) {
       const modal = document.getElementById("fullscreenModal");
       const image = document.getElementById("fullscreenImage");
       image.src = src;
       modal.classList.add("active");
     }
-
     function closeFullscreen() {
       document.getElementById("fullscreenModal").classList.remove("active");
     }
