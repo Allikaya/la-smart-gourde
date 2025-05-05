@@ -1,150 +1,106 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gourde Connectée Multifonction</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7; color: #333; }
-    header, footer { background-color: #222; color: white; padding: 20px; text-align: center; }
-    nav a { margin: 0 10px; color: white; text-decoration: none; font-weight: bold; }
-    .container { padding: 20px; max-width: 1200px; margin: auto; }
-    h1, h2, h3 { color: #1e88e5; }
-    .product-image { width: 100%; max-width: 300px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .features img { width: 100px; }
-    .payment-methods img { width: 60px; margin: 10px; }
-    .promo-banner { background-color: #ffeb3b; padding: 10px; text-align: center; font-weight: bold; }
-    .faq, .policy { margin-top: 40px; }
-    .hidden { display: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gourde Connectée Intelligente</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+        header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+        .carousel, .carousel-avis { display: flex; overflow-x: auto; gap: 10px; padding: 20px; scroll-snap-type: x mandatory; }
+        .carousel img, .carousel-avis > div { scroll-snap-align: center; flex-shrink: 0; }
+        .carousel img { height: 300px; border-radius: 10px; }
+        .carousel-avis > div { min-width: 300px; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .section { padding: 20px; background: white; margin: 20px; border-radius: 10px; }
+        .formulaire { display: flex; flex-direction: column; gap: 10px; }
+        input, select, button { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #2c3e50; color: white; cursor: pointer; }
+        .stars { color: #f39c12; }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>La Gourde Connectée Multifonction</h1>
-    <nav>
-      <a href="#accueil">Accueil</a>
-      <a href="#produit">Produit</a>
-      <a href="#commande">Commander</a>
-      <a href="#avis">Avis</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
 
-  <div class="promo-banner">
-    🎉 Lancement : -20% pour les 100 premières commandes + Livraison Gratuite ! 🎉
-  </div>
+<header>
+    <h1>Gourde Connectée Intelligente</h1>
+    <p>Hydratez-vous intelligemment, suivez votre consommation, restez connecté.</p>
+</header>
 
-  <section id="accueil" class="container">
-    <h2>La gourde intelligente qui vous suit partout</h2>
-    <p>Conçue pour les pros en déplacement : 2 compartiments, écran connecté, suivi hydratation via application.</p>
-    <img src="https://via.placeholder.com/300" alt="Gourde connectée" class="product-image">
-    <button onclick="document.getElementById('commande').scrollIntoView();">Commander maintenant</button>
-  </section>
+<div class="carousel">
+    <img src="/mnt/data/6ea03c2d-fb68-40d4-bd69-e1ef07cca2d1.png" alt="Gourde Connectée Photo Principale">
+    <img src="image2.jpg" alt="Vue latérale">
+    <img src="image3.jpg" alt="Application mobile">
+    <img src="image4.jpg" alt="Capteurs et données">
+</div>
 
-  <section id="produit" class="container">
+<section class="section">
     <h2>Description du produit</h2>
-    <div class="grid">
-      <div>
-        <img src="https://via.placeholder.com/250x400" alt="Vue gourde">
-        <img src="https://via.placeholder.com/250x100" alt="Vue écran">
-      </div>
-      <div>
-        <h3>Fonctionnalités :</h3>
-        <ul>
-          <li>💧 Deux compartiments séparés</li>
-          <li>📱 Écran intelligent : température, niveau, alertes</li>
-          <li>📲 App mobile : suivi hydratation, alarmes</li>
-          <li>♻️ Matériaux durables et démontables</li>
-          <li>🔋 10h d'autonomie thermique</li>
-        </ul>
-        <h3>Fiche technique :</h3>
-        <p>Hauteur : 25cm | Poids : 400g | Capacité : 2 x 350ml | Matériaux : Acier inoxydable, plastique recyclé</p>
-        <h3>Prix :</h3>
-        <p><strong>59,99€</strong> (ou <strong>3 x 19,99€</strong> sans frais)</p>
-      </div>
+    <p>La gourde connectée intelligente surveille votre consommation d'eau, vous alerte pour rester hydraté et affiche la température, l'humidité et le niveau de batterie. Synchronisation avec votre smartphone incluse.</p>
+</section>
+
+<section class="section">
+    <h2>Fonctionnalités</h2>
+    <ul>
+        <li>Écran digital intégré avec température, humidité, niveau de batterie</li>
+        <li>Connexion Bluetooth à une application dédiée</li>
+        <li>Suivi de l'hydratation en temps réel</li>
+        <li>Alertes personnalisables</li>
+        <li>Double réservoir pour boissons différentes</li>
+    </ul>
+    <img src="image3.jpg" alt="Application de contrôle via mobile">
+</section>
+
+<section class="section">
+    <h2>Fiche technique</h2>
+    <ul>
+        <li>Capacité : 500 ml x 2</li>
+        <li>Autonomie : 7 jours</li>
+        <li>Connexion : Bluetooth 5.0</li>
+        <li>Recharge : USB-C</li>
+        <li>Matériaux : Acier inoxydable + verre renforcé</li>
+    </ul>
+    <img src="image4.jpg" alt="Caractéristiques techniques">
+</section>
+
+<section class="section">
+    <h2>Prix</h2>
+    <p><strong>79,90 €</strong></p>
+</section>
+
+<section class="section">
+    <h2>Commandez maintenant</h2>
+    <form class="formulaire">
+        <input type="text" placeholder="Nom complet" required>
+        <input type="email" placeholder="Adresse e-mail" required>
+        <input type="text" placeholder="Adresse de livraison" required>
+        <select required>
+            <option value="">Choisissez votre pays</option>
+            <option value="fr">France</option>
+            <option value="be">Belgique</option>
+            <option value="ch">Suisse</option>
+        </select>
+        <h3>Informations de paiement</h3>
+        <input type="text" placeholder="Numéro de carte" required>
+        <input type="text" placeholder="Nom sur la carte" required>
+        <input type="text" placeholder="Date d'expiration (MM/AA)" required>
+        <input type="text" placeholder="Cryptogramme visuel (CVV)" required>
+        <button type="submit">Valider la commande</button>
+    </form>
+</section>
+
+<section class="section">
+    <h2>Avis Clients</h2>
+    <div class="carousel-avis">
+        <div><p>"Produit révolutionnaire ! Je bois plus souvent, et je peux suivre tout sur mon téléphone."</p><p class="stars">★★★★★</p></div>
+        <div><p>"Super design, très utile pendant le sport. Les alertes sont pratiques."</p><p class="stars">★★★★☆</p></div>
+        <div><p>"La double contenance est une idée géniale, je recommande !"</p><p class="stars">★★★★★</p></div>
     </div>
-  </section>
+</section>
 
-  <section id="commande" class="container">
-    <h2>Commander maintenant</h2>
-    <form onsubmit="event.preventDefault(); alert('Lien de paiement généré !');">
-      <label>Nom complet :</label><br>
-      <input type="text" required><br>
-      <label>Email :</label><br>
-      <input type="email" required><br>
-      <label>Adresse de livraison :</label><br>
-      <textarea required></textarea><br>
-      <label>Choisissez votre moyen de paiement :</label><br>
-      <select id="payment" onchange="updatePaymentOptions()">
-        <option value="card">Carte Bancaire</option>
-        <option value="paypal">PayPal</option>
-        <option value="momo">Mobile Money</option>
-        <option value="split">Paiement en plusieurs fois</option>
-      </select>
-      <div id="split-conditions" class="hidden">
-        <p><strong>Conditions :</strong> 3 mensualités égales. 1ère immédiatement, les autres chaque mois.</p>
-      </div>
-      <div class="payment-methods">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/MasterCard_Logo.svg" alt="Mastercard">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/MoMo_logo.svg" alt="Mobile Money">
-      </div>
-      <button type="submit">Commander</button>
-    </form>
-  </section>
+<script>
+    const avis = document.querySelector('.carousel-avis');
+    setInterval(() => { avis.scrollBy({ left: 310, behavior: 'smooth' }); }, 3000);
+</script>
 
-  <section id="avis" class="container">
-    <h2>Avis des utilisateurs</h2>
-    <blockquote>"Un must pour les déplacements. Facile à utiliser, tech et élégante !" – Alex Moreau</blockquote>
-    <blockquote>"J'adore les rappels d'hydratation. L'application est top !" – Sophie L.</blockquote>
-  </section>
-
-  <section class="container">
-    <h2>Vidéo Démo</h2>
-    <video width="100%" controls>
-      <source src="demo.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas la vidéo.
-    </video>
-  </section>
-
-  <section id="faq" class="faq container">
-    <h2>FAQ</h2>
-    <p><strong>Quelle est la garantie ?</strong> 1 an.</p>
-    <p><strong>Quels pays livrez-vous ?</strong> France, Belgique, Canada, Afrique francophone.</p>
-    <p><strong>Combien coûte la livraison ?</strong> Gratuite à partir de 49€. Sinon, 4,99€.</p>
-  </section>
-
-  <section class="policy container">
-    <h2>Mentions légales & Confidentialité</h2>
-    <p><strong>Politique de confidentialité :</strong> Vos données sont utilisées uniquement pour traiter vos commandes. Elles ne sont jamais revendues.</p>
-    <p><strong>Politique de retour :</strong> Retour sous 14 jours si non utilisé. Remboursement sous 7 jours après réception.</p>
-    <p><strong>Conditions générales :</strong> En achetant, vous acceptez nos CGV disponibles sur demande.</p>
-  </section>
-
-  <section id="contact" class="container">
-    <h2>Contact</h2>
-    <p>Email : contact@gourde-connect.fr</p>
-    <p>WhatsApp : +33 6 12 34 56 78</p>
-    <form>
-      <label>Message :</label><br>
-      <textarea required></textarea><br>
-      <button>Envoyer</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Gourde Connectée - Tous droits réservés</p>
-  </footer>
-
-  <script>
-    function updatePaymentOptions() {
-      const payment = document.getElementById('payment').value;
-      document.getElementById('split-conditions').classList.toggle('hidden', payment !== 'split');
-    }
-  </script>
 </body>
 </html>
