@@ -94,7 +94,6 @@
     const unitPrice = 89;
     const quantityInput = document.getElementById("quantity");
     const priceDisplay = document.getElementById("total-price");
-
     quantityInput.addEventListener("input", () => {
       const quantity = parseInt(quantityInput.value) || 1;
       const total = unitPrice * quantity;
