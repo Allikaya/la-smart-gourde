@@ -85,18 +85,19 @@
       <li>Matériaux : Inox + silicone alimentaire</li>
       <li>Autonomie batterie : 7 jours</li>
     </ul>
-   <h2 id="price-display">Prix total : 89€</h2>
- <script>
-  const unitPrice = 89;
-  const quantityInput = document.querySelector('input[name="quantity"]');
-  const priceDisplay = document.getElementById('price-display');
+   <h2 data-i18n="price">Prix unitaire : 69,99€</h2>
+<p><strong>Total : <span id="total-price">69,99€</span></strong></p>
+<script>
+  const unitPrice = 69,99; // Prix unitaire en euros
+  const quantityInput = document.getElementById("quantity");
+  const totalPriceDisplay = document.getElementById("total-price");
   function updateTotalPrice() {
-    const qty = parseInt(quantityInput.value) || 1;
-    const total = qty * unitPrice;
-    priceDisplay.textContent = `Prix total : ${total}€`;
+    const quantity = parseInt(quantityInput.value) || 1;
+    const total = quantity * unitPrice;
+    totalPriceDisplay.textContent = `Prix total : ${total}€`;
   }
-  quantityInput.addEventListener('input', updateTotalPrice);
-  updateTotalPrice(); // Initialise le prix à l'ouverture
+  quantityInput.addEventListener("input", updateTotalPrice);
+  updateTotalPrice(); // Initialisation
 </script>
     <form>
       <label>Nom complet <input type="text" name="name" required></label>
@@ -107,7 +108,6 @@
         <select>
           <option value="cb">Carte Bancaire</option>
           <option value="paypal">PayPal</option>
-          <option value="klarna">Klarna</option>
           <option value="oney">Oney</option>
         </select>
       </label>
@@ -130,6 +130,7 @@
       <h2 data-i18n="reviews">Avis clients</h2>
     <div class="reviews-carousel swiper">
       <div class="swiper-wrapper">
+        
         <div class="swiper-slide">⭐⭐⭐⭐⭐ "Excellente gourde, très pratique en déplacement !"</div>
         <div class="swiper-slide">⭐⭐⭐⭐ "Le système de rappel m’aide vraiment à boire plus."</div>
         <div class="swiper-slide">⭐⭐⭐⭐⭐ "Top design et super fonctionnelle."</div>
@@ -138,6 +139,7 @@
         <div class="swiper-slide">⭐⭐⭐⭐⭐ "Indispensable pour les journées de travail chargées."</div>
         <div class="swiper-slide">⭐⭐⭐⭐⭐ "J'adore le suivi via l'application, très utile pour ma santé !"</div>
         <div class="swiper-slide">⭐⭐⭐⭐ "Livraison rapide et produit bien emballé."</div>
+        
       </div>
       <div class="swiper-pagination"></div>
     </div>
