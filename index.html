@@ -87,18 +87,20 @@
     </ul>
    <h2 data-i18n="price">Prix unitaire : 69,99€</h2>
 <p><strong>Total : <span id="total-price">69,99€</span></strong></p>
-<script>
-  const unitPrice = 69,99; // Prix unitaire en euros
-  const quantityInput = document.getElementById("quantity");
-  const totalPriceDisplay = document.getElementById("total-price");
-  function updateTotalPrice() {
-    const quantity = parseInt(quantityInput.value) || 1;
-    const total = quantity * unitPrice;
-    totalPriceDisplay.textContent = `Prix total : ${total}€`;
-  }
-  quantityInput.addEventListener("input", updateTotalPrice);
-  updateTotalPrice(); // Initialisation
-</script>
+</head>
+<body>
+    <h1>Calcul du prix d’un produit (sans TVA)</h1>
+    <form method="post">
+        <label>Prix unitaire (€) :</label>
+        <input type="text" name="unit_price" value="69.99" required><br><br>
+        <label>Quantité :</label>
+        <input type="number" name="quantity" value="3" required><br><br>
+        <button type="submit">Calculer</button>
+    </form>
+    {% if total_price is not none %}
+        <h2>Prix total : {{ total_price }} €</h2>
+    {% endif %}
+</body>
     <form>
       <label>Nom complet <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
