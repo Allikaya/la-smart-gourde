@@ -85,9 +85,19 @@
       <li>Matériaux : Inox + silicone alimentaire</li>
       <li>Autonomie batterie : 7 jours</li>
     </ul>
-
-    <h2>Prix : 89€</h2>
-
+   <h2 id="price-display">Prix total : 89€</h2>
+ <script>
+  const unitPrice = 89;
+  const quantityInput = document.querySelector('input[name="quantity"]');
+  const priceDisplay = document.getElementById('price-display');
+  function updateTotalPrice() {
+    const qty = parseInt(quantityInput.value) || 1;
+    const total = qty * unitPrice;
+    priceDisplay.textContent = `Prix total : ${total}€`;
+  }
+  quantityInput.addEventListener('input', updateTotalPrice);
+  updateTotalPrice(); // Initialise le prix à l'ouverture
+</script>
     <form>
       <label>Nom complet <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
