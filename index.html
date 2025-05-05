@@ -85,22 +85,22 @@
       <li>Matériaux : Inox + silicone alimentaire</li>
       <li>Autonomie batterie : 7 jours</li>
     </ul>
-   <h2 data-i18n="price">Prix unitaire : 69,99€</h2>
-<p><strong>Total : <span id="total-price">69,99€</span></strong></p>
-</head>
-<body>
-    <h1>Calcul du prix d’un produit (sans TVA)</h1>
-    <form method="post">
-        <label>Prix unitaire (€) :</label>
-        <input type="text" name="unit_price" value="69.99" required><br><br>
-        <label>Quantité :</label>
-        <input type="number" name="quantity" value="3" required><br><br>
-        <button type="submit">Calculer</button>
-    </form>
-    {% if total_price is not none %}
-        <h2>Prix total : {{ total_price }} €</h2>
-    {% endif %}
-</body>
+  <label>Quantité
+      <input type="number" id="quantity" name="quantity" value="1" min="1">
+    </label>
+    <div id="total-price">Prix total : 89€</div>
+  </form>
+  <script>
+    const unitPrice = 89;
+    const quantityInput = document.getElementById("quantity");
+    const priceDisplay = document.getElementById("total-price");
+
+    quantityInput.addEventListener("input", () => {
+      const quantity = parseInt(quantityInput.value) || 1;
+      const total = unitPrice * quantity;
+      priceDisplay.textContent = `Prix total : ${total}€`;
+    });
+  </script>
     <form>
       <label>Nom complet <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
