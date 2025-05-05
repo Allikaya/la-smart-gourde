@@ -94,6 +94,22 @@
       <label>Email <input type="email" name="email" required></label>
       <label>Adresse de livraison <textarea name="address" required></textarea></label>
       <label>Quantité <input type="number" name="quantity" value="1" min="1"></label>
+      <p id="total-price">Total : 89€</p>
+      const unitPrice = 89;
+      <script>
+const quantityInput = document.querySelector('input[name="quantity"]');
+const totalPriceDisplay = document.getElementById("total-price");
+
+function updateTotalPrice() {
+  const quantity = parseInt(quantityInput.value) || 1;
+  const total = unitPrice * quantity;
+  totalPriceDisplay.textContent = `Total : ${total}€`;
+}
+quantityInput.addEventListener('input', updateTotalPrice);
+
+// Mise à jour initiale au chargement
+updateTotalPrice();
+<script>
       <label>Moyen de paiement:
         <select>
           <option value="cb">Carte Bancaire</option>
