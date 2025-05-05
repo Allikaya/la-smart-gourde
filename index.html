@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,19 +9,37 @@
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
     header, footer { background: #000; color: #fff; padding: 1rem; text-align: center; }
-    nav { display: flex; justify-content: space-between; padding: 1rem; background: #fff; }
+    nav { display: flex; justify-content: flex-end; padding: 1rem; background: #fff; }
     .container { padding: 2rem; }
-    .swiper, .reviews-carousel { width: 100%; max-width: 800px; margin: auto; }
-    .product-gallery img, .feature-image, .spec-image { max-width: 100%; height: auto; border-radius: 8px; }
+    .carousel, .reviews-carousel { width: 100%; max-width: 600px; margin: auto; }
+    .dropdown-content { display: none; }
+    .dropdown:hover .dropdown-content { display: block; background: #eee; padding: 1rem; }
+    .product-gallery img { width: 100%; height: auto; border-radius: 8px; cursor: pointer; }
     .button { background: #007bff; color: white; padding: 1rem; border: none; cursor: pointer; border-radius: 5px; }
     form { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
     label { font-weight: bold; }
     input, select, textarea { padding: 0.5rem; width: 100%; max-width: 400px; }
-    .dropdown-content { display: none; }
-    .dropdown:hover .dropdown-content { display: block; background: #eee; padding: 1rem; }
-    .price-display { font-size: 1.3rem; font-weight: bold; color: #28a745; margin-top: 1rem; }
-    .fullscreen-image { cursor: pointer; transition: transform 0.3s ease; }
-    .fullscreen-image:hover { transform: scale(1.05); }
+    .swiper-slide { transition: transform 0.6s ease; }
+    .swiper-slide-active { transform: scale(1.05); }
+    .fullscreen-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+    }
+    .fullscreen-modal img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .fullscreen-modal.active {
+      display: flex;
+    }
   </style>
 </head>
 <body>
@@ -29,9 +48,8 @@
     <p>Boostez votre énergie et votre concentration où que vous soyez</p>
     <button class="button">Commander maintenant</button>
   </header>
-
   <nav>
-    <div>
+    <div class="country-select">
       <label>Pays de livraison:
         <select id="country-select" onchange="updateDeliveryOptions()">
           <option value="fr">France</option>
@@ -41,42 +59,41 @@
       </label>
     </div>
   </nav>
-
   <section class="container">
     <div class="product-gallery swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="main-product.jpg" alt="Gourde connectée" class="fullscreen-image"></div>
-        <div class="swiper-slide"><img src="angle2.jpg" alt="Vue angle 2" class="fullscreen-image"></div>
-        <div class="swiper-slide"><img src="angle3.jpg" alt="Vue angle 3" class="fullscreen-image"></div>
+        <div class="swiper-slide"><img src="main-product.jpg" alt="Gourde connectée" onclick="openFullscreen(this.src)"></div>
+        <div class="swiper-slide"><img src="angle2.jpg" alt="Vue angle 2" onclick="openFullscreen(this.src)"></div>
+        <div class="swiper-slide"><img src="angle3.jpg" alt="Vue angle 3" onclick="openFullscreen(this.src)"></div>
       </div>
       <div class="swiper-pagination"></div>
     </div>
-
+    <div class="fullscreen-modal" id="fullscreenModal" onclick="closeFullscreen()">
+      <img id="fullscreenImage" src="" alt="Vue agrandie">
+    </div>
     <h2>Fonctionnalités principales</h2>
     <ul>
-      <li><img src="feature1.jpg" alt="Alerte hydratation intelligente" class="feature-image"> Alerte hydratation intelligente</li>
-      <li><img src="feature2.jpg" alt="Affichage de la température" class="feature-image"> Affichage de la température</li>
-      <li><img src="feature3.jpg" alt="Compartiments démontables" class="feature-image"> Compartiments démontables</li>
-      <li><img src="feature4.jpg" alt="Application mobile" class="feature-image"> Application mobile connectée</li>
-      <li><img src="feature5.jpg" alt="Isothermie optimisée" class="feature-image"> Isothermie optimisée</li>
+      <li>Alerte hydratation intelligente</li>
+      <li>Affichage de la température</li>
+      <li>Compartiments démontables</li>
+      <li>Application mobile connectée</li>
+      <li>Isothermie optimisée</li>
     </ul>
-
     <h2>Fiche technique</h2>
     <ul>
-      <li><img src="spec1.jpg" alt="Taille 25 cm" class="spec-image"> Taille : 25 cm</li>
-      <li><img src="spec2.jpg" alt="Poids 350g" class="spec-image"> Poids : 350 g</li>
-      <li><img src="spec3.jpg" alt="Inox + silicone" class="spec-image"> Matériaux : Inox + silicone alimentaire</li>
-      <li><img src="spec4.jpg" alt="Autonomie" class="spec-image"> Autonomie batterie : 7 jours</li>
+      <li>Taille : 25 cm</li>
+      <li>Poids : 350 g</li>
+      <li>Matériaux : Inox + silicone alimentaire</li>
+      <li>Autonomie batterie : 7 jours</li>
     </ul>
 
-    <h2>Prix unitaire : 89€</h2>
-    <div class="price-display" id="total-price">Prix total : 89€</div>
+    <h2>Prix : 89€</h2>
 
     <form>
       <label>Nom complet <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
       <label>Adresse de livraison <textarea name="address" required></textarea></label>
-      <label>Quantité <input type="number" id="quantity" name="quantity" value="1" min="1"></label>
+      <label>Quantité <input type="number" name="quantity" value="1" min="1"></label>
       <label>Moyen de paiement:
         <select>
           <option value="cb">Carte Bancaire</option>
@@ -97,32 +114,32 @@
     <div class="dropdown">
       <span>Voir les détails</span>
       <div class="dropdown-content">
-        <p>30 jours pour retourner le produit, dans son emballage d'origine, non utilisé.</p>
+        <p>Vous disposez de 30 jours pour retourner le produit. Il doit être dans son emballage d'origine, non utilisé.</p>
       </div>
     </div>
 
-    <h2>Avis clients</h2>
+      <h2 data-i18n="reviews">Avis clients</h2>
     <div class="reviews-carousel swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">⭐⭐⭐⭐⭐ "Excellente gourde, très pratique !"</div>
-        <div class="swiper-slide">⭐⭐⭐⭐ "Le rappel m’aide à boire plus."</div>
-        <div class="swiper-slide">⭐⭐⭐⭐⭐ "Top design et fonctionnelle."</div>
+        <div class="swiper-slide">⭐⭐⭐⭐⭐ "Excellente gourde, très pratique en déplacement !"</div>
+        <div class="swiper-slide">⭐⭐⭐⭐ "Le système de rappel m’aide vraiment à boire plus."</div>
+        <div class="swiper-slide">⭐⭐⭐⭐⭐ "Top design et super fonctionnelle."</div>
+        <div class="swiper-slide">⭐⭐⭐⭐⭐ "L’application est super intuitive. Je recommande !"</div>
+        <div class="swiper-slide">⭐⭐⭐⭐ "Un peu chère mais ça vaut l’investissement."</div>
+        <div class="swiper-slide">⭐⭐⭐⭐⭐ "Indispensable pour les journées de travail chargées."</div>
+        <div class="swiper-slide">⭐⭐⭐⭐⭐ "J'adore le suivi via l'application, très utile pour ma santé !"</div>
+        <div class="swiper-slide">⭐⭐⭐⭐ "Livraison rapide et produit bien emballé."</div>
       </div>
       <div class="swiper-pagination"></div>
     </div>
-
-    <h2>Vidéo démonstration</h2>
-    <video controls width="100%">
-      <source src="demo-gourde.mp4" type="video/mp4">
-    </video>
 
     <h2>FAQ</h2>
     <div class="dropdown faq">
       <span>Voir les questions fréquentes</span>
       <div class="dropdown-content">
-        <p><strong>Garantie ?</strong> 2 ans à partir de la date d’achat.</p>
-        <p><strong>Application ?</strong> Bluetooth, iOS/Android.</p>
-        <p><strong>Nettoyage ?</strong> Compartiments lavables à la main.</p>
+        <p><strong>Quelle est la durée de garantie ?</strong><br>2 ans à compter de la date d’achat.</p>
+        <p><strong>Comment fonctionne l’application ?</strong><br>Connexion Bluetooth, compatible iOS/Android.</p>
+        <p><strong>Comment nettoyer la gourde ?</strong><br>Compartiments démontables lavables à la main.</p>
       </div>
     </div>
 
@@ -130,6 +147,20 @@
     <p>Email : contact@gourdeconnectee.com</p>
     <p>WhatsApp : +33 6 00 00 00 00</p>
     <p>Téléphone : 01 23 45 67 89</p>
+
+    <div class="dropdown legal">
+      <span>Mentions légales</span>
+      <div class="dropdown-content">
+        <p>Éditeur : GourdeConnectée SAS - RCS 000000000 - 10 rue des Innovations, Paris.</p>
+      </div>
+    </div>
+
+    <div class="dropdown privacy">
+      <span>Politique de confidentialité</span>
+      <div class="dropdown-content">
+        <p>Nous collectons uniquement les données nécessaires à la livraison. Aucune revente à des tiers.</p>
+      </div>
+    </div>
   </section>
 
   <footer>
@@ -138,23 +169,23 @@
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
-    new Swiper('.swiper', {
+    new Swiper('.product-gallery', {
       loop: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      autoplay: {
-        delay: 3000,
-      },
-      effect: 'fade'
+      pagination: { el: '.swiper-pagination', clickable: true },
+      autoplay: { delay: 3000 },
+      effect: 'slide',
+      speed: 600,
     });
 
+    new Swiper('.reviews-carousel', {
+      loop: true,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      autoplay: { delay: 5000 },
+    });
     function updateDeliveryOptions() {
       const country = document.getElementById("country-select").value;
       const delivery = document.getElementById("delivery-options");
       delivery.innerHTML = "";
-
       if (country === "fr") {
         delivery.innerHTML += '<option>Standard - 3 jours - 5€</option>';
         delivery.innerHTML += '<option>Express - 24h - 10€</option>';
@@ -166,23 +197,15 @@
         delivery.innerHTML += '<option>Express - 3 jours - 25€</option>';
       }
     }
-
-    const unitPrice = 89;
-    const quantityInput = document.getElementById("quantity");
-    const priceDisplay = document.getElementById("total-price");
-
-    quantityInput.addEventListener("input", () => {
-      const quantity = parseInt(quantityInput.value) || 1;
-      const total = unitPrice * quantity;
-      priceDisplay.textContent = `Prix total : ${total}€`;
-    });
-
-    document.querySelectorAll('.fullscreen-image').forEach(img => {
-      img.addEventListener('click', () => {
-        const win = window.open();
-        win.document.write('<img src="' + img.src + '" style="width:100%">');
-      });
-    });
+    function openFullscreen(src) {
+      const modal = document.getElementById("fullscreenModal");
+      const image = document.getElementById("fullscreenImage");
+      image.src = src;
+      modal.classList.add("active");
+    }
+    function closeFullscreen() {
+      document.getElementById("fullscreenModal").classList.remove("active");
+    }
   </script>
 </body>
 </html>
