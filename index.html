@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -87,29 +86,14 @@
       <li>Autonomie batterie : 7 jours</li>
     </ul>
 
-    <h2>Prix : 89€</h2>
+    <h2>Prix unitaire : 89€</h2>
+    <h2 id="total-price">Prix total : 89€</h2>
 
     <form>
       <label>Nom complet <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
       <label>Adresse de livraison <textarea name="address" required></textarea></label>
       <label>Quantité <input type="number" name="quantity" value="1" min="1"></label>
-      <p id="total-price">Total : 89€</p>
-      const unitPrice = 89;
-      <script>
-const quantityInput = document.querySelector('input[name="quantity"]');
-const totalPriceDisplay = document.getElementById("total-price");
-
-function updateTotalPrice() {
-  const quantity = parseInt(quantityInput.value) || 1;
-  const total = unitPrice * quantity;
-  totalPriceDisplay.textContent = `Total : ${total}€`;
-}
-quantityInput.addEventListener('input', updateTotalPrice);
-
-// Mise à jour initiale au chargement
-updateTotalPrice();
-<script>
       <label>Moyen de paiement:
         <select>
           <option value="cb">Carte Bancaire</option>
@@ -125,7 +109,6 @@ updateTotalPrice();
       </label>
       <button class="button" type="submit">Valider la commande</button>
     </form>
-
     <h2>Politique de retour</h2>
     <div class="dropdown">
       <span>Voir les détails</span>
@@ -133,8 +116,7 @@ updateTotalPrice();
         <p>Vous disposez de 30 jours pour retourner le produit. Il doit être dans son emballage d'origine, non utilisé.</p>
       </div>
     </div>
-
-      <h2 data-i18n="reviews">Avis clients</h2>
+    <h2 data-i18n="reviews">Avis clients</h2>
     <div class="reviews-carousel swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">⭐⭐⭐⭐⭐ "Excellente gourde, très pratique en déplacement !"</div>
@@ -148,7 +130,6 @@ updateTotalPrice();
       </div>
       <div class="swiper-pagination"></div>
     </div>
-
     <h2>FAQ</h2>
     <div class="dropdown faq">
       <span>Voir les questions fréquentes</span>
@@ -158,19 +139,16 @@ updateTotalPrice();
         <p><strong>Comment nettoyer la gourde ?</strong><br>Compartiments démontables lavables à la main.</p>
       </div>
     </div>
-
     <h2>Contact</h2>
     <p>Email : contact@gourdeconnectee.com</p>
     <p>WhatsApp : +33 6 00 00 00 00</p>
     <p>Téléphone : 01 23 45 67 89</p>
-
     <div class="dropdown legal">
       <span>Mentions légales</span>
       <div class="dropdown-content">
         <p>Éditeur : GourdeConnectée SAS - RCS 000000000 - 10 rue des Innovations, Paris.</p>
       </div>
     </div>
-
     <div class="dropdown privacy">
       <span>Politique de confidentialité</span>
       <div class="dropdown-content">
@@ -178,11 +156,9 @@ updateTotalPrice();
       </div>
     </div>
   </section>
-
   <footer>
     <p>&copy; 2025 Gourde Connectée - Tous droits réservés</p>
   </footer>
-
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
     new Swiper('.product-gallery', {
@@ -192,7 +168,6 @@ updateTotalPrice();
       effect: 'slide',
       speed: 600,
     });
-
     new Swiper('.reviews-carousel', {
       loop: true,
       pagination: { el: '.swiper-pagination', clickable: true },
@@ -222,6 +197,17 @@ updateTotalPrice();
     function closeFullscreen() {
       document.getElementById("fullscreenModal").classList.remove("active");
     }
+    const unitPrice = 89;
+    const quantityInput = document.querySelector('input[name="quantity"]');
+    const totalPriceDisplay = document.getElementById('total-price');
+    function updateTotalPrice() {
+      const quantity = parseInt(quantityInput.value) || 1;
+      const total = unitPrice * quantity;
+      totalPriceDisplay.textContent = `Prix total : ${total}€`;
+    }
+    quantityInput.addEventListener('input', updateTotalPrice);
+    updateTotalPrice();
   </script>
 </body>
 </html>
+
