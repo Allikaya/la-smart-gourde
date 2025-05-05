@@ -1,106 +1,249 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gourde Connectée Intelligente</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Gourde Connectée</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
-        header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-        .carousel, .carousel-avis { display: flex; overflow-x: auto; gap: 10px; padding: 20px; scroll-snap-type: x mandatory; }
-        .carousel img, .carousel-avis > div { scroll-snap-align: center; flex-shrink: 0; }
-        .carousel img { height: 300px; border-radius: 10px; }
-        .carousel-avis > div { min-width: 300px; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .section { padding: 20px; background: white; margin: 20px; border-radius: 10px; }
-        .formulaire { display: flex; flex-direction: column; gap: 10px; }
-        input, select, button { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-        button { background: #2c3e50; color: white; cursor: pointer; }
-        .stars { color: #f39c12; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #0288d1;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        header select {
+            margin-top: 10px;
+            padding: 8px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #0288d1;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #01579b;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #0288d1;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .order-form input {
+            padding: 10px;
+            margin: 10px;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .payment-logos img {
+            width: 50px;
+            margin: 10px;
+        }
+
+        footer {
+            background-color: #0288d1;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
+
 <body>
+    <header>
+        <div class="header-content">
+            <h1 id="slogan">Restez hydraté, restez performant.</h1>
+            <button id="order-now">Commander maintenant</button>
+            <select id="language-select" onchange="changeLanguage()">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+    </header>
 
-<header>
-    <h1>Gourde Connectée Intelligente</h1>
-    <p>Hydratez-vous intelligemment, suivez votre consommation, restez connecté.</p>
-</header>
+    <section class="product-details">
+        <h2 id="features-title">Fonctionnalités</h2>
+        <ul id="features-list">
+            <li>Gourde connectée avec alerte de boisson</li>
+            <li>Suivi de température</li>
+            <li>Connectivité Bluetooth</li>
+        </ul>
 
-<div class="carousel">
-    <img src="images/gourde-principale.png" alt="Gourde Connectée Photo Principale">
-    <img src="images/vue-laterale.jpg" alt="Vue latérale">
-    <img src="images/application-mobile.jpg" alt="Application mobile">
-    <img src="images/capteurs-donnees.jpg" alt="Capteurs et données">
-</div>
+        <h2 id="specs-title">Fiche technique</h2>
+        <ul id="specs-list">
+            <li>Taille: 500ml</li>
+            <li>Matériaux: Acier inoxydable</li>
+            <li>Autonomie de batterie: 30 jours</li>
+        </ul>
+    </section>
 
-<section class="section">
-    <h2>Description du produit</h2>
-    <p>La gourde connectée intelligente surveille votre consommation d'eau, vous alerte pour rester hydraté et affiche la température, l'humidité et le niveau de batterie. Synchronisation avec votre smartphone incluse.</p>
-</section>
+    <section class="gallery">
+        <h2>Galerie</h2>
+        <div id="carousel" class="carousel">
+            <img src="images/product1.jpg" alt="Gourde vue 1">
+            <img src="images/product2.jpg" alt="Gourde vue 2">
+            <img src="images/product3.jpg" alt="Gourde vue 3">
+        </div>
+    </section>
 
-<section class="section">
-    <h2>Fonctionnalités</h2>
-    <ul>
-        <li>Écran digital intégré avec température, humidité, niveau de batterie</li>
-        <li>Connexion Bluetooth à une application dédiée</li>
-        <li>Suivi de l'hydratation en temps réel</li>
-        <li>Alertes personnalisables</li>
-        <li>Double réservoir pour boissons différentes</li>
-    </ul>
-    <img src="images/application-mobile.jpg" alt="Application de contrôle via mobile">
-</section>
+    <section class="order-form">
+        <h2 id="form-title">Formulaire de commande</h2>
+        <form id="order-form">
+            <input type="text" id="name" placeholder="Nom" required />
+            <input type="email" id="email" placeholder="Email" required />
+            <input type="number" id="quantity" placeholder="Quantité" required />
+            <button type="submit">Soumettre</button>
+        </form>
+    </section>
 
-<section class="section">
-    <h2>Fiche technique</h2>
-    <ul>
-        <li>Capacité : 500 ml x 2</li>
-        <li>Autonomie : 7 jours</li>
-        <li>Connexion : Bluetooth 5.0</li>
-        <li>Recharge : USB-C</li>
-        <li>Matériaux : Acier inoxydable + verre renforcé</li>
-    </ul>
-    <img src="images/capteurs-donnees.jpg" alt="Caractéristiques techniques">
-</section>
+    <section class="reviews">
+        <h2 id="review-title">Avis des clients</h2>
+        <textarea id="review-input" placeholder="Votre avis ici..."></textarea>
+        <button id="submit-review">Soumettre</button>
+        <ul id="reviews-list"></ul>
+    </section>
 
-<section class="section">
-    <h2>Prix</h2>
-    <p><strong>79,90 €</strong></p>
-</section>
+    <section class="payment-logos">
+        <img src="images/paypal.png" alt="PayPal" />
+        <img src="images/visa.png" alt="Visa" />
+        <img src="images/mastercard.png" alt="Mastercard" />
+    </section>
 
-<section class="section">
-    <h2>Commandez maintenant</h2>
-    <form class="formulaire">
-        <input type="text" placeholder="Nom complet" required>
-        <input type="email" placeholder="Adresse e-mail" required>
-        <input type="text" placeholder="Adresse de livraison" required>
-        <select required>
-            <option value="">Choisissez votre pays</option>
-            <option value="fr">France</option>
-            <option value="be">Belgique</option>
-            <option value="ch">Suisse</option>
-        </select>
-        <h3>Informations de paiement</h3>
-        <input type="text" placeholder="Numéro de carte" required>
-        <input type="text" placeholder="Nom sur la carte" required>
-        <input type="text" placeholder="Date d'expiration (MM/AA)" required>
-        <input type="text" placeholder="Cryptogramme visuel (CVV)" required>
-        <button type="submit">Valider la commande</button>
-    </form>
-</section>
+    <footer>
+        <p>&copy; 2025 Gourde Connectée</p>
+    </footer>
 
-<section class="section">
-    <h2>Avis Clients</h2>
-    <div class="carousel-avis">
-        <div><p>"Produit révolutionnaire ! Je bois plus souvent, et je peux suivre tout sur mon téléphone."</p><p class="stars">★★★★★</p></div>
-        <div><p>"Super design, très utile pendant le sport. Les alertes sont pratiques."</p><p class="stars">★★★★☆</p></div>
-        <div><p>"La double contenance est une idée géniale, je recommande !"</p><p class="stars">★★★★★</p></div>
-    </div>
-</section>
+    <script>
+        let currentLang = 'fr';
 
-<script>
-    const avis = document.querySelector('.carousel-avis');
-    setInterval(() => { avis.scrollBy({ left: 310, behavior: 'smooth' }); }, 3000);
-</script>
+        const translations = {
+            fr: {
+                slogan: "Restez hydraté, restez performant.",
+                orderNow: "Commander maintenant",
+                featuresTitle: "Fonctionnalités",
+                specsTitle: "Fiche technique",
+                formTitle: "Formulaire de commande",
+                submit: "Soumettre",
+                reviewTitle: "Avis des clients",
+                placeholder: "Votre avis ici..."
+            },
+            en: {
+                slogan: "Stay hydrated, stay sharp.",
+                orderNow: "Order now",
+                featuresTitle: "Features",
+                specsTitle: "Specifications",
+                formTitle: "Order Form",
+                submit: "Submit",
+                reviewTitle: "Customer Reviews",
+                placeholder: "Your review here..."
+            }
+        };
 
+        const changeLanguage = () => {
+            currentLang = document.getElementById('language-select').value;
+            updateLanguage();
+        };
+
+        const updateLanguage = () => {
+            const t = translations[currentLang];
+
+            document.getElementById('slogan').textContent = t.slogan;
+            document.getElementById('order-now').textContent = t.orderNow;
+            document.getElementById('features-title').textContent = t.featuresTitle;
+            document.getElementById('specs-title').textContent = t.specsTitle;
+            document.getElementById('form-title').textContent = t.formTitle;
+            document.getElementById('review-title').textContent = t.reviewTitle;
+            document.getElementById('review-input').placeholder = t.placeholder;
+        };
+
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        const totalImages = images.length;
+
+        const startCarousel = () => {
+            setInterval(() => {
+                images[currentIndex].style.display = 'none';
+                currentIndex = (currentIndex + 1) % totalImages;
+                images[currentIndex].style.display = 'block';
+            }, 3000);
+        };
+
+        document.getElementById('order-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Formulaire soumis !');
+        });
+
+        document.getElementById('submit-review').addEventListener('click', () => {
+            const reviewText = document.getElementById('review-input').value;
+            if (reviewText) {
+                const reviewItem = document.createElement('li');
+                reviewItem.textContent = reviewText;
+                document.getElementById('reviews-list').appendChild(reviewItem);
+                document.getElementById('review-input').value = '';
+            }
+        });
+
+        // Initialisation
+        window.onload = () => {
+            updateLanguage();
+            startCarousel();
+        };
+    </script>
 </body>
+
 </html>
+
