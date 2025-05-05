@@ -97,11 +97,18 @@
       <label>Moyen de paiement:
         <select>
           <option value="cb">Carte Bancaire</option>
-          <option value="paypal">PayPal</option>
-          <option value="klarna">Klarna</option>
-          <option value="oney">Oney</option>
         </select>
       </label>
+      
+      <label for="card-number">Numéro de carte bancaire :</label>
+      <input type="text" id="card-number" name="card-number" placeholder="XXXX XXXX XXXX XXXX" required>
+      
+      <label for="expiration-date">Date d'expiration :</label>
+      <input type="text" id="expiration-date" name="expiration-date" placeholder="MM/AA" required>
+      
+      <label for="cvv">Code de sécurité (CVV) :</label>
+      <input type="text" id="cvv" name="cvv" placeholder="XXX" required>
+      
       <label>Options de livraison:
         <select id="delivery-options">
           <option>Veuillez sélectionner un pays</option>
@@ -109,6 +116,7 @@
       </label>
       <button class="button" type="submit">Valider la commande</button>
     </form>
+
     <h2>Politique de retour</h2>
     <div class="dropdown">
       <span>Voir les détails</span>
@@ -116,6 +124,7 @@
         <p>Vous disposez de 30 jours pour retourner le produit. Il doit être dans son emballage d'origine, non utilisé.</p>
       </div>
     </div>
+
     <h2 data-i18n="reviews">Avis clients</h2>
     <div class="reviews-carousel swiper">
       <div class="swiper-wrapper">
@@ -130,6 +139,7 @@
       </div>
       <div class="swiper-pagination"></div>
     </div>
+
     <h2>FAQ</h2>
     <div class="dropdown faq">
       <span>Voir les questions fréquentes</span>
@@ -139,16 +149,19 @@
         <p><strong>Comment nettoyer la gourde ?</strong><br>Compartiments démontables lavables à la main.</p>
       </div>
     </div>
+
     <h2>Contact</h2>
     <p>Email : contact@gourdeconnectee.com</p>
     <p>WhatsApp : +33 6 00 00 00 00</p>
     <p>Téléphone : 01 23 45 67 89</p>
+
     <div class="dropdown legal">
       <span>Mentions légales</span>
       <div class="dropdown-content">
         <p>Éditeur : GourdeConnectée SAS - RCS 000000000 - 10 rue des Innovations, Paris.</p>
       </div>
     </div>
+
     <div class="dropdown privacy">
       <span>Politique de confidentialité</span>
       <div class="dropdown-content">
@@ -156,9 +169,11 @@
       </div>
     </div>
   </section>
+
   <footer>
     <p>&copy; 2025 Gourde Connectée - Tous droits réservés</p>
   </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
     new Swiper('.product-gallery', {
@@ -168,11 +183,13 @@
       effect: 'slide',
       speed: 600,
     });
+
     new Swiper('.reviews-carousel', {
       loop: true,
       pagination: { el: '.swiper-pagination', clickable: true },
       autoplay: { delay: 5000 },
     });
+
     function updateDeliveryOptions() {
       const country = document.getElementById("country-select").value;
       const delivery = document.getElementById("delivery-options");
@@ -188,26 +205,30 @@
         delivery.innerHTML += '<option>Express - 3 jours - 25€</option>';
       }
     }
+
     function openFullscreen(src) {
       const modal = document.getElementById("fullscreenModal");
       const image = document.getElementById("fullscreenImage");
       image.src = src;
       modal.classList.add("active");
     }
+
     function closeFullscreen() {
       document.getElementById("fullscreenModal").classList.remove("active");
     }
+
     const unitPrice = 89;
     const quantityInput = document.querySelector('input[name="quantity"]');
     const totalPriceDisplay = document.getElementById('total-price');
+
     function updateTotalPrice() {
       const quantity = parseInt(quantityInput.value) || 1;
       const total = unitPrice * quantity;
       totalPriceDisplay.textContent = `Prix total : ${total}€`;
     }
+
     quantityInput.addEventListener('input', updateTotalPrice);
     updateTotalPrice();
   </script>
 </body>
 </html>
-
