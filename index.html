@@ -2,142 +2,149 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gourde Intelligente 2-en-1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gourde Connectée Multifonction</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f7f7;
-      color: #333;
-    }
-    header {
-      background: #2e86de;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-    }
-    header h1 {
-      font-size: 32px;
-      margin: 0;
-    }
-    .btn {
-      background: #f1c40f;
-      color: #000;
-      padding: 12px 20px;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 5px;
-      display: inline-block;
-      margin-top: 10px;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
-      background: white;
-      margin-top: 20px;
-      border-radius: 10px;
-    }
-    h2 {
-      color: #2e86de;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #999;
-    }
-    .avis {
-      border-left: 4px solid #f1c40f;
-      margin-bottom: 20px;
-      padding-left: 10px;
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7; color: #333; }
+    header, footer { background-color: #222; color: white; padding: 20px; text-align: center; }
+    nav a { margin: 0 10px; color: white; text-decoration: none; font-weight: bold; }
+    .container { padding: 20px; max-width: 1200px; margin: auto; }
+    h1, h2, h3 { color: #1e88e5; }
+    .product-image { width: 100%; max-width: 300px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .features img { width: 100px; }
+    .payment-methods img { width: 60px; margin: 10px; }
+    .promo-banner { background-color: #ffeb3b; padding: 10px; text-align: center; font-weight: bold; }
+    .faq, .policy { margin-top: 40px; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
+  <header>
+    <h1>La Gourde Connectée Multifonction</h1>
+    <nav>
+      <a href="#accueil">Accueil</a>
+      <a href="#produit">Produit</a>
+      <a href="#commande">Commander</a>
+      <a href="#avis">Avis</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<header>
-  <h1>Gourde Intelligente 2-en-1</h1>
-  <p>Hydratation intelligente, partout avec vous.</p>
-  <a href="#commande" class="btn">Commander maintenant</a>
-</header>
-
-<section>
-  <h2>🧴 Description du produit</h2>
-  <ul>
-    <li>🧊 2 compartiments pour emporter 2 boissons</li>
-    <li>🥤 Gobelet intégré</li>
-    <li>🔒 Étanchéité parfaite – chaud 8h / froid 12h</li>
-    <li>⚙️ Écran tactile avec température</li>
-  </ul>
-</section>
-
-<section>
-  <h2>📸 Photos</h2>
-  <p>(Ajoutez vos images ici)</p>
-</section>
-
-<section id="commande">
-  <h2>📝 Formulaire de commande</h2>
-  <form action="https://formspree.io/f/ton-id-formspree" method="POST">
-    <label>Nom complet *</label>
-    <input type="text" name="nom" required>
-
-    <label>Email *</label>
-    <input type="email" name="email" required>
-
-    <label>Adresse de livraison *</label>
-    <textarea name="adresse" required></textarea>
-
-    <label>Quantité</label>
-    <select name="quantite">
-      <option value="1">1 gourde – 29,90€</option>
-      <option value="2">2 gourdes – 56,90€</option>
-      <option value="3">3 gourdes – 82,90€</option>
-    </select>
-
-    <label>Message (optionnel)</label>
-    <textarea name="message"></textarea>
-
-    <button type="submit" class="btn">Envoyer la commande</button>
-  </form>
-  <p style="font-size: 14px; color: gray;">* Une confirmation vous sera envoyée par email.</p>
-</section>
-
-<section>
-  <h2>⭐ Avis clients</h2>
-  <div class="avis">
-    <p><strong>Sarah M. :</strong> "Idéale pour mes trajets en train. Super pratique les 2 boissons !"</p>
+  <div class="promo-banner">
+    🎉 Lancement : -20% pour les 100 premières commandes + Livraison Gratuite ! 🎉
   </div>
-  <div class="avis">
-    <p><strong>Jean B. :</strong> "Produit bien pensé, solide, j'adore l’écran de température."</p>
-  </div>
-  <div class="avis">
-    <p><strong>Aline R. :</strong> "Livraison rapide, service client au top."</p>
-  </div>
-</section>
 
-<section>
-  <h2>📞 Contact</h2>
-  <p>Email : contact@gourdeintelligente.fr</p>
-  <p>WhatsApp : +33 6 12 34 56 78</p>
-</section>
+  <section id="accueil" class="container">
+    <h2>La gourde intelligente qui vous suit partout</h2>
+    <p>Conçue pour les pros en déplacement : 2 compartiments, écran connecté, suivi hydratation via application.</p>
+    <img src="https://via.placeholder.com/300" alt="Gourde connectée" class="product-image">
+    <button onclick="document.getElementById('commande').scrollIntoView();">Commander maintenant</button>
+  </section>
 
-<footer>
-  © 2025 Gourde Intelligente – N° SIRET 123 456 789 00012
-</footer>
+  <section id="produit" class="container">
+    <h2>Description du produit</h2>
+    <div class="grid">
+      <div>
+        <img src="https://via.placeholder.com/250x400" alt="Vue gourde">
+        <img src="https://via.placeholder.com/250x100" alt="Vue écran">
+      </div>
+      <div>
+        <h3>Fonctionnalités :</h3>
+        <ul>
+          <li>💧 Deux compartiments séparés</li>
+          <li>📱 Écran intelligent : température, niveau, alertes</li>
+          <li>📲 App mobile : suivi hydratation, alarmes</li>
+          <li>♻️ Matériaux durables et démontables</li>
+          <li>🔋 10h d'autonomie thermique</li>
+        </ul>
+        <h3>Fiche technique :</h3>
+        <p>Hauteur : 25cm | Poids : 400g | Capacité : 2 x 350ml | Matériaux : Acier inoxydable, plastique recyclé</p>
+        <h3>Prix :</h3>
+        <p><strong>59,99€</strong> (ou <strong>3 x 19,99€</strong> sans frais)</p>
+      </div>
+    </div>
+  </section>
 
+  <section id="commande" class="container">
+    <h2>Commander maintenant</h2>
+    <form onsubmit="event.preventDefault(); alert('Lien de paiement généré !');">
+      <label>Nom complet :</label><br>
+      <input type="text" required><br>
+      <label>Email :</label><br>
+      <input type="email" required><br>
+      <label>Adresse de livraison :</label><br>
+      <textarea required></textarea><br>
+      <label>Choisissez votre moyen de paiement :</label><br>
+      <select id="payment" onchange="updatePaymentOptions()">
+        <option value="card">Carte Bancaire</option>
+        <option value="paypal">PayPal</option>
+        <option value="momo">Mobile Money</option>
+        <option value="split">Paiement en plusieurs fois</option>
+      </select>
+      <div id="split-conditions" class="hidden">
+        <p><strong>Conditions :</strong> 3 mensualités égales. 1ère immédiatement, les autres chaque mois.</p>
+      </div>
+      <div class="payment-methods">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/MasterCard_Logo.svg" alt="Mastercard">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/MoMo_logo.svg" alt="Mobile Money">
+      </div>
+      <button type="submit">Commander</button>
+    </form>
+  </section>
+
+  <section id="avis" class="container">
+    <h2>Avis des utilisateurs</h2>
+    <blockquote>"Un must pour les déplacements. Facile à utiliser, tech et élégante !" – Alex Moreau</blockquote>
+    <blockquote>"J'adore les rappels d'hydratation. L'application est top !" – Sophie L.</blockquote>
+  </section>
+
+  <section class="container">
+    <h2>Vidéo Démo</h2>
+    <video width="100%" controls>
+      <source src="demo.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+  </section>
+
+  <section id="faq" class="faq container">
+    <h2>FAQ</h2>
+    <p><strong>Quelle est la garantie ?</strong> 1 an.</p>
+    <p><strong>Quels pays livrez-vous ?</strong> France, Belgique, Canada, Afrique francophone.</p>
+    <p><strong>Combien coûte la livraison ?</strong> Gratuite à partir de 49€. Sinon, 4,99€.</p>
+  </section>
+
+  <section class="policy container">
+    <h2>Mentions légales & Confidentialité</h2>
+    <p><strong>Politique de confidentialité :</strong> Vos données sont utilisées uniquement pour traiter vos commandes. Elles ne sont jamais revendues.</p>
+    <p><strong>Politique de retour :</strong> Retour sous 14 jours si non utilisé. Remboursement sous 7 jours après réception.</p>
+    <p><strong>Conditions générales :</strong> En achetant, vous acceptez nos CGV disponibles sur demande.</p>
+  </section>
+
+  <section id="contact" class="container">
+    <h2>Contact</h2>
+    <p>Email : contact@gourde-connect.fr</p>
+    <p>WhatsApp : +33 6 12 34 56 78</p>
+    <form>
+      <label>Message :</label><br>
+      <textarea required></textarea><br>
+      <button>Envoyer</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Gourde Connectée - Tous droits réservés</p>
+  </footer>
+
+  <script>
+    function updatePaymentOptions() {
+      const payment = document.getElementById('payment').value;
+      document.getElementById('split-conditions').classList.toggle('hidden', payment !== 'split');
+    }
+  </script>
 </body>
 </html>
