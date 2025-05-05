@@ -1,249 +1,149 @@
-<!DOCTYPE html>
-<html lang="fr">
+import { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Carousel } from "@/components/ui/carousel";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gourde Connectée</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+const deliveryTimes = {
+  FR: '3-5 jours ouvrés', DE: '2-4 jours ouvrés', US: '5-7 business days', CA: '3-4 jours ouvrés',
+  IT: '3-4 jours ouvrés', ES: '3-4 jours ouvrés', UK: '4-6 jours ouvrés', NL: '3-4 jours ouvrés',
+  BE: '2-4 jours ouvrés', CH: '4-6 jours ouvrés', PT: '3-4 jours ouvrés', SE: '4-6 jours ouvrés',
+  NO: '3-5 jours ouvrés', FI: '3-5 jours ouvrés', DK: '4-6 jours ouvrés', JP: '7-10 business days',
+  CN: '7-12 business days', AU: '4-8 jours ouvrés', BR: '8-12 jours ouvrés',
+};
 
-        header {
-            background-color: #0288d1;
-            padding: 20px;
-            color: white;
-            text-align: center;
-        }
+const paymentOptions = {
+  default: ["visa", "mastercard", "paypal"],
+  FR: ["visa", "mastercard", "paypal", "klarna", "oney"],
+  DE: ["visa", "mastercard", "paypal", "klarna"],
+  US: ["visa", "mastercard", "paypal"],
+};
 
-        header select {
-            margin-top: 10px;
-            padding: 8px;
-            font-size: 1rem;
-        }
+const translations = {
+  fr: {
+    slogan: "Restez hydraté, restez performant.",
+    orderNow: "Commander maintenant",
+    featuresTitle: "Fonctionnalités",
+    specsTitle: "Fiche technique",
+    buyTitle: "Acheter",
+    monthlyPayment: "Paiement en 3x",
+    addToCart: "Ajouter au panier",
+    reviewsTitle: "Avis clients",
+    contactTitle: "Contact",
+    send: "Envoyer",
+    delivery: "Délais de livraison",
+    faq: [
+      ["Quelle est la durée de la garantie ?", "2 ans de garantie constructeur."],
+      ["Quels sont les délais de livraison ?", "Variable selon le pays (voir ci-dessus)."],
+      ["Comment fonctionne l'application mobile ?", "Disponible sur iOS/Android, connexion Bluetooth."],
+    ],
+    legal: [
+      ["Mentions légales", "Ce site est édité par SmartHydrate, SARL enregistrée à Lyon."],
+      ["Politique de retour", "Retour sous 30 jours dans l'emballage d'origine."],
+      ["Politique de confidentialité", "Vos données sont sécurisées et non revendues."],
+    ]
+  },
+  en: {
+    slogan: "Stay hydrated, stay sharp.",
+    orderNow: "Order now",
+    featuresTitle: "Features",
+    specsTitle: "Specifications",
+    buyTitle: "Buy",
+    monthlyPayment: "Pay in 3x",
+    addToCart: "Add to cart",
+    reviewsTitle: "Customer reviews",
+    contactTitle: "Contact",
+    send: "Send",
+    delivery: "Delivery Time",
+    faq: [
+      ["What is the warranty period?", "2-year manufacturer warranty."],
+      ["How long is delivery?", "Depends on country (see above)."],
+      ["How does the app work?", "iOS/Android app connects via Bluetooth."],
+    ],
+    legal: [
+      ["Legal Notice", "This site is operated by SmartHydrate SARL, Lyon, France."],
+      ["Return Policy", "Return within 30 days in original packaging."],
+      ["Privacy Policy", "Your data is protected and never sold."],
+    ]
+  }
+};
 
-        button {
-            background-color: #0288d1;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2em;
-            border-radius: 5px;
-        }
+export default function App() {
+  const [lang, setLang] = useState("fr");
+  const [country, setCountry] = useState("FR");
+  const [payment, setPayment] = useState("visa");
 
-        button:hover {
-            background-color: #01579b;
-        }
+  useEffect(() => {
+    const savedLang = localStorage.getItem("lang");
+    const savedCountry = localStorage.getItem("country");
+    const userLang = navigator.language.slice(0, 2);
 
-        section {
-            padding: 20px;
-            margin: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    setLang(savedLang || (translations[userLang] ? userLang : "en"));
+    if (savedCountry) setCountry(savedCountry);
+  }, []);
 
-        h2 {
-            color: #0288d1;
-        }
+  useEffect(() => {
+    localStorage.setItem("lang", lang);
+    localStorage.setItem("country", country);
+  }, [lang, country]);
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+  const t = translations[lang];
+  const paymentLogos = paymentOptions[country] || paymentOptions.default;
 
-        ul li {
-            margin: 10px 0;
-        }
+  return (
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <select value={lang} onChange={(e) => setLang(e.target.value)}>
+          {Object.keys(translations).map(code => (
+            <option key={code} value={code}>{code.toUpperCase()}</option>
+          ))}
+        </select>
 
-        .carousel {
-            display: flex;
-            overflow: hidden;
-            position: relative;
-        }
+        <select value={country} onChange={(e) => setCountry(e.target.value)}>
+          {Object.keys(deliveryTimes).map(code => (
+            <option key={code} value={code}>{code}</option>
+          ))}
+        </select>
+      </div>
 
-        .carousel img {
-            width: 100%;
-            height: auto;
-            margin-right: 10px;
-        }
+      <h1 className="text-3xl font-bold mb-2">{t.slogan}</h1>
+      <Carousel images={["main.jpg", "view1.jpg", "view2.jpg"]} />
+      <Button className="my-4">{t.orderNow}</Button>
 
-        .order-form input {
-            padding: 10px;
-            margin: 10px;
-            width: 100%;
-            font-size: 1rem;
-        }
+      <Card className="my-4">
+        <CardContent>
+          <h2 className="text-xl font-semibold mb-2">{t.delivery}</h2>
+          <p>{deliveryTimes[country] || "N/A"}</p>
+        </CardContent>
+      </Card>
 
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
+      <h2 className="text-xl font-semibold mt-6">{t.buyTitle}</h2>
+      <select value={payment} onChange={(e) => setPayment(e.target.value)}>
+        {paymentLogos.map(method => (
+          <option key={method} value={method}>{method.toUpperCase()}</option>
+        ))}
+      </select>
+      <div className="flex gap-2 mt-2 items-center">
+        <img src={`images/${payment}.png`} alt={`${payment} logo`} className="h-8" />
+        {(payment === 'paypal' || payment === 'klarna' || payment === 'oney') && (
+          <p>{t.monthlyPayment}: 3 x 19,99€</p>
+        )}
+      </div>
 
-        .payment-logos img {
-            width: 50px;
-            margin: 10px;
-        }
-
-        footer {
-            background-color: #0288d1;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        <div class="header-content">
-            <h1 id="slogan">Restez hydraté, restez performant.</h1>
-            <button id="order-now">Commander maintenant</button>
-            <select id="language-select" onchange="changeLanguage()">
-                <option value="fr">Français</option>
-                <option value="en">English</option>
-            </select>
-        </div>
-    </header>
-
-    <section class="product-details">
-        <h2 id="features-title">Fonctionnalités</h2>
-        <ul id="features-list">
-            <li>Gourde connectée avec alerte de boisson</li>
-            <li>Suivi de température</li>
-            <li>Connectivité Bluetooth</li>
-        </ul>
-
-        <h2 id="specs-title">Fiche technique</h2>
-        <ul id="specs-list">
-            <li>Taille: 500ml</li>
-            <li>Matériaux: Acier inoxydable</li>
-            <li>Autonomie de batterie: 30 jours</li>
-        </ul>
-    </section>
-
-    <section class="gallery">
-        <h2>Galerie</h2>
-        <div id="carousel" class="carousel">
-            <img src="images/product1.jpg" alt="Gourde vue 1">
-            <img src="images/product2.jpg" alt="Gourde vue 2">
-            <img src="images/product3.jpg" alt="Gourde vue 3">
-        </div>
-    </section>
-
-    <section class="order-form">
-        <h2 id="form-title">Formulaire de commande</h2>
-        <form id="order-form">
-            <input type="text" id="name" placeholder="Nom" required />
-            <input type="email" id="email" placeholder="Email" required />
-            <input type="number" id="quantity" placeholder="Quantité" required />
-            <button type="submit">Soumettre</button>
-        </form>
-    </section>
-
-    <section class="reviews">
-        <h2 id="review-title">Avis des clients</h2>
-        <textarea id="review-input" placeholder="Votre avis ici..."></textarea>
-        <button id="submit-review">Soumettre</button>
-        <ul id="reviews-list"></ul>
-    </section>
-
-    <section class="payment-logos">
-        <img src="images/paypal.png" alt="PayPal" />
-        <img src="images/visa.png" alt="Visa" />
-        <img src="images/mastercard.png" alt="Mastercard" />
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Gourde Connectée</p>
-    </footer>
-
-    <script>
-        let currentLang = 'fr';
-
-        const translations = {
-            fr: {
-                slogan: "Restez hydraté, restez performant.",
-                orderNow: "Commander maintenant",
-                featuresTitle: "Fonctionnalités",
-                specsTitle: "Fiche technique",
-                formTitle: "Formulaire de commande",
-                submit: "Soumettre",
-                reviewTitle: "Avis des clients",
-                placeholder: "Votre avis ici..."
-            },
-            en: {
-                slogan: "Stay hydrated, stay sharp.",
-                orderNow: "Order now",
-                featuresTitle: "Features",
-                specsTitle: "Specifications",
-                formTitle: "Order Form",
-                submit: "Submit",
-                reviewTitle: "Customer Reviews",
-                placeholder: "Your review here..."
-            }
-        };
-
-        const changeLanguage = () => {
-            currentLang = document.getElementById('language-select').value;
-            updateLanguage();
-        };
-
-        const updateLanguage = () => {
-            const t = translations[currentLang];
-
-            document.getElementById('slogan').textContent = t.slogan;
-            document.getElementById('order-now').textContent = t.orderNow;
-            document.getElementById('features-title').textContent = t.featuresTitle;
-            document.getElementById('specs-title').textContent = t.specsTitle;
-            document.getElementById('form-title').textContent = t.formTitle;
-            document.getElementById('review-title').textContent = t.reviewTitle;
-            document.getElementById('review-input').placeholder = t.placeholder;
-        };
-
-        let currentIndex = 0;
-        const images = document.querySelectorAll('.carousel img');
-        const totalImages = images.length;
-
-        const startCarousel = () => {
-            setInterval(() => {
-                images[currentIndex].style.display = 'none';
-                currentIndex = (currentIndex + 1) % totalImages;
-                images[currentIndex].style.display = 'block';
-            }, 3000);
-        };
-
-        document.getElementById('order-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Formulaire soumis !');
-        });
-
-        document.getElementById('submit-review').addEventListener('click', () => {
-            const reviewText = document.getElementById('review-input').value;
-            if (reviewText) {
-                const reviewItem = document.createElement('li');
-                reviewItem.textContent = reviewText;
-                document.getElementById('reviews-list').appendChild(reviewItem);
-                document.getElementById('review-input').value = '';
-            }
-        });
-
-        // Initialisation
-        window.onload = () => {
-            updateLanguage();
-            startCarousel();
-        };
-    </script>
-</body>
-
-</html>
-
+      <Accordion type="multiple" className="mt-6">
+        {t.faq.map(([q, a], i) => (
+          <AccordionItem key={`faq${i}`} value={`faq${i}`}>
+            <AccordionTrigger>{q}</AccordionTrigger>
+            <AccordionContent>{a}</AccordionContent>
+          </AccordionItem>
+        ))}
+        {t.legal.map(([q, a], i) => (
+          <AccordionItem key={`legal${i}`} value={`legal${i}`}>
+            <AccordionTrigger>{q}</AccordionTrigger>
+            <AccordionContent>{a}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
+  );
+}
