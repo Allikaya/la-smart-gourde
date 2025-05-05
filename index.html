@@ -2,229 +2,218 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gourde Connectée Multifonction</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header, footer {
-      background: #111;
-      color: #fff;
-      padding: 1.5rem;
-      text-align: center;
-    }
-    nav {
-      background: #fff;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .container {
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .swiper {
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-    }
-    .swiper-slide img {
-      width: 100%;
-      display: block;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .swiper-slide img:hover {
-      transform: scale(1.02);
-    }
-    .button {
-      background: #007bff;
-      color: white;
-      padding: 1rem 2rem;
-      border: none;
-      cursor: pointer;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-    li {
-      margin-bottom: 0.75rem;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-    li::before {
-      content: "✔️";
-      position: absolute;
-      left: 0;
-    }
-    .feature-image, .spec-image {
-      width: 100%;
-      max-width: 600px;
-      margin: 1rem auto;
-      display: block;
-      border-radius: 8px;
-    }
-    .dropdown-content {
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
+    header, footer { background: #000; color: #fff; padding: 1rem; text-align: center; }
+    nav { display: flex; justify-content: flex-end; padding: 1rem; background: #fff; }
+    .container { padding: 2rem; }
+    .carousel, .reviews-carousel { width: 100%; max-width: 600px; margin: auto; }
+    .dropdown-content { display: none; }
+    .dropdown:hover .dropdown-content { display: block; background: #eee; padding: 1rem; }
+    .product-gallery img { width: 100%; height: auto; border-radius: 8px; cursor: pointer; }
+    .button { background: #007bff; color: white; padding: 1rem; border: none; cursor: pointer; border-radius: 5px; }
+    form { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    label { font-weight: bold; }
+    input, select, textarea { padding: 0.5rem; width: 100%; max-width: 400px; }
+    .swiper-slide { transition: transform 0.6s ease; }
+    .swiper-slide-active { transform: scale(1.05); }
+    .fullscreen-modal {
       display: none;
-      padding: 1rem;
-      background: #eee;
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    video {
-      border-radius: 10px;
-      margin-top: 1rem;
-    }
-    .fullscreen {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
       background: rgba(0,0,0,0.9);
-      display: none;
-      align-items: center;
       justify-content: center;
-      z-index: 999;
+      align-items: center;
     }
-    .fullscreen img {
+    .fullscreen-modal img {
       max-width: 90%;
       max-height: 90%;
+    }
+    .fullscreen-modal.active {
+      display: flex;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Hydratez-vous intelligemment avec la gourde connectée</h1>
+    <p>Boostez votre énergie et votre concentration où que vous soyez</p>
+    <button class="button">Commander maintenant</button>
+  </header>
 
-<header>
-  <h1>Hydratez-vous intelligemment avec la gourde connectée</h1>
-  <p>Boostez votre énergie et votre concentration où que vous soyez</p>
-  <button class="button">Commander maintenant</button>
-</header>
-
-<nav>
-  <div>
-    <label>Langue:
-      <select id="language-select">
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-      </select>
-    </label>
-  </div>
-  <div>
-    <label>Pays de livraison:
-      <select id="country-select" onchange="updateDeliveryOptions()">
-        <option value="fr">France</option>
-        <option value="de">Allemagne</option>
-        <option value="us">États-Unis</option>
-      </select>
-    </label>
-  </div>
-</nav>
-
-<section class="container">
-  <div class="swiper product-gallery">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide"><img src="main-product.jpg" alt="Gourde connectée"></div>
-      <div class="swiper-slide"><img src="angle2.jpg" alt="Vue angle 2"></div>
-      <div class="swiper-slide"><img src="angle3.jpg" alt="Vue angle 3"></div>
+  <nav>
+    <div class="country-select">
+      <label>Pays de livraison:
+        <select id="country-select" onchange="updateDeliveryOptions()">
+          <option value="fr">France</option>
+          <option value="de">Allemagne</option>
+          <option value="us">États-Unis</option>
+        </select>
+      </label>
     </div>
-    <div class="swiper-pagination"></div>
-  </div>
+  </nav>
 
-  <h2>Fonctionnalités principales</h2>
-  <ul>
-    <li>Alerte hydratation intelligente</li>
-    <img src="feature-hydratation.jpg" alt="Alerte hydratation" class="feature-image">
-    <li>Affichage de la température</li>
-    <img src="feature-temperature.jpg" alt="Affichage température" class="feature-image">
-    <li>Compartiments démontables</li>
-    <img src="feature-compartiments.jpg" alt="Compartiments" class="feature-image">
-    <li>Application mobile connectée</li>
-    <img src="feature-app.jpg" alt="App mobile" class="feature-image">
-    <li>Isothermie optimisée</li>
-    <img src="feature-isotherme.jpg" alt="Isolation thermique" class="feature-image">
-  </ul>
+  <section class="container">
+    <div class="product-gallery swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="main-product.jpg" alt="Gourde connectée" onclick="openFullscreen(this.src)"></div>
+        <div class="swiper-slide"><img src="angle2.jpg" alt="Vue angle 2" onclick="openFullscreen(this.src)"></div>
+        <div class="swiper-slide"><img src="angle3.jpg" alt="Vue angle 3" onclick="openFullscreen(this.src)"></div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
 
-  <h2>Fiche technique</h2>
-  <ul>
-    <li>Taille : 25 cm</li>
-    <li>Poids : 350 g</li>
-    <li>Matériaux : Inox + silicone alimentaire</li>
-    <li>Autonomie batterie : 7 jours</li>
-  </ul>
-  <img src="tech-specs.jpg" alt="Fiche technique gourde" class="spec-image">
+    <div class="fullscreen-modal" id="fullscreenModal" onclick="closeFullscreen()">
+      <img id="fullscreenImage" src="" alt="Vue agrandie">
+    </div>
 
-  <h2>Prix : 89€</h2>
+    <h2>Fonctionnalités principales</h2>
+    <ul>
+      <li>Alerte hydratation intelligente</li>
+      <li>Affichage de la température</li>
+      <li>Compartiments démontables</li>
+      <li>Application mobile connectée</li>
+      <li>Isothermie optimisée</li>
+    </ul>
 
-  <!-- Formulaire identique (non répété ici pour concision) -->
+    <h2>Fiche technique</h2>
+    <ul>
+      <li>Taille : 25 cm</li>
+      <li>Poids : 350 g</li>
+      <li>Matériaux : Inox + silicone alimentaire</li>
+      <li>Autonomie batterie : 7 jours</li>
+    </ul>
 
-  <h2>Vidéo démonstration</h2>
-  <video controls>
-    <source src="demo-gourde.mp4" type="video/mp4">
-    Votre navigateur ne supporte pas la vidéo.
-  </video>
-</section>
+    <h2>Prix : 89€</h2>
 
-<div class="fullscreen" id="fullscreen-viewer" onclick="closeFullscreen()">
-  <img id="fullscreen-img" src="">
-</div>
+    <form>
+      <label>Nom complet <input type="text" name="name" required></label>
+      <label>Email <input type="email" name="email" required></label>
+      <label>Adresse de livraison <textarea name="address" required></textarea></label>
+      <label>Quantité <input type="number" name="quantity" value="1" min="1"></label>
+      <label>Moyen de paiement:
+        <select>
+          <option value="cb">Carte Bancaire</option>
+          <option value="paypal">PayPal</option>
+          <option value="klarna">Klarna</option>
+          <option value="oney">Oney</option>
+        </select>
+      </label>
+      <label>Options de livraison:
+        <select id="delivery-options">
+          <option>Veuillez sélectionner un pays</option>
+        </select>
+      </label>
+      <button class="button" type="submit">Valider la commande</button>
+    </form>
 
-<footer>
-  <p>&copy; 2025 Gourde Connectée - Tous droits réservés</p>
-</footer>
+    <h2>Politique de retour</h2>
+    <div class="dropdown">
+      <span>Voir les détails</span>
+      <div class="dropdown-content">
+        <p>Vous disposez de 30 jours pour retourner le produit. Il doit être dans son emballage d'origine, non utilisé.</p>
+      </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script>
-  const swiper = new Swiper('.swiper', {
-    loop: true,
-    pagination: { el: '.swiper-pagination', clickable: true },
-    autoplay: { delay: 3000 },
-    effect: 'fade',
-    fadeEffect: { crossFade: true },
-  });
+    <h2>Avis clients</h2>
+    <div class="reviews-carousel swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">⭐⭐⭐⭐⭐ "Excellente gourde, très pratique en déplacement !"</div>
+        <div class="swiper-slide">⭐⭐⭐⭐ "Le système de rappel m’aide vraiment à boire plus."</div>
+        <!-- Autres avis -->
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
 
-  function updateDeliveryOptions() {
-    const country = document.getElementById("country-select").value;
-    const delivery = document.getElementById("delivery-options") || document.createElement("select");
-    delivery.innerHTML = "";
+    <h2>Vidéo démonstration</h2>
+    <video controls width="100%">
+      <source src="demo-gourde.mp4" type="video/mp4">
+      <p>Votre navigateur ne supporte pas la vidéo.</p>
+    </video>
 
-    const options = {
-      fr: ['Standard - 3 jours - 5€', 'Express - 24h - 10€'],
-      de: ['Standard - 4 jours - 7€', 'Express - 48h - 12€'],
-      us: ['Standard - 7 jours - 15€', 'Express - 3 jours - 25€'],
-    };
+    <h2>FAQ</h2>
+    <div class="dropdown faq">
+      <span>Voir les questions fréquentes</span>
+      <div class="dropdown-content">
+        <p><strong>Quelle est la durée de garantie ?</strong><br>2 ans à compter de la date d’achat.</p>
+        <p><strong>Comment fonctionne l’application ?</strong><br>Connexion Bluetooth, compatible iOS/Android.</p>
+        <p><strong>Comment nettoyer la gourde ?</strong><br>Compartiments démontables lavables à la main.</p>
+      </div>
+    </div>
 
-    if (options[country]) {
-      options[country].forEach(opt => {
-        const el = document.createElement("option");
-        el.textContent = opt;
-        delivery.appendChild(el);
-      });
-    }
-  }
+    <h2>Contact</h2>
+    <p>Email : contact@gourdeconnectee.com</p>
+    <p>WhatsApp : +33 6 00 00 00 00</p>
+    <p>Téléphone : 01 23 45 67 89</p>
 
-  // Visionneuse plein écran
-  document.querySelectorAll('.swiper-slide img').forEach(img => {
-    img.addEventListener('click', function () {
-      document.getElementById("fullscreen-img").src = this.src;
-      document.getElementById("fullscreen-viewer").style.display = "flex";
+    <div class="dropdown legal">
+      <span>Mentions légales</span>
+      <div class="dropdown-content">
+        <p>Éditeur : GourdeConnectée SAS - RCS 000000000 - 10 rue des Innovations, Paris.</p>
+      </div>
+    </div>
+
+    <div class="dropdown privacy">
+      <span>Politique de confidentialité</span>
+      <div class="dropdown-content">
+        <p>Nous collectons uniquement les données nécessaires à la livraison. Aucune revente à des tiers.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Gourde Connectée - Tous droits réservés</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper('.product-gallery', {
+      loop: true,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      autoplay: { delay: 3000 },
+      effect: 'slide',
+      speed: 600,
     });
-  });
 
-  function closeFullscreen() {
-    document.getElementById("fullscreen-viewer").style.display = "none";
-  }
-</script>
+    new Swiper('.reviews-carousel', {
+      loop: true,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      autoplay: { delay: 5000 },
+    });
+
+    function updateDeliveryOptions() {
+      const country = document.getElementById("country-select").value;
+      const delivery = document.getElementById("delivery-options");
+      delivery.innerHTML = "";
+      if (country === "fr") {
+        delivery.innerHTML += '<option>Standard - 3 jours - 5€</option>';
+        delivery.innerHTML += '<option>Express - 24h - 10€</option>';
+      } else if (country === "de") {
+        delivery.innerHTML += '<option>Standard - 4 jours - 7€</option>';
+        delivery.innerHTML += '<option>Express - 48h - 12€</option>';
+      } else if (country === "us") {
+        delivery.innerHTML += '<option>Standard - 7 jours - 15€</option>';
+        delivery.innerHTML += '<option>Express - 3 jours - 25€</option>';
+      }
+    }
+
+    function openFullscreen(src) {
+      const modal = document.getElementById("fullscreenModal");
+      const image = document.getElementById("fullscreenImage");
+      image.src = src;
+      modal.classList.add("active");
+    }
+
+    function closeFullscreen() {
+      document.getElementById("fullscreenModal").classList.remove("active");
+    }
+  </script>
 </body>
 </html>
